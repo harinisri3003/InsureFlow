@@ -497,7 +497,7 @@
                             </button>
                         </div>
 
-                        <form id="customerForm">
+                        <form id="customerForm" action="${pageContext.request.contextPath}/customer" method="POST">
                             <!-- SECTION 1: BASIC CUSTOMER DETAILS -->
                             <div class="form-section">
                                 <div class="section-header">
@@ -932,27 +932,29 @@
 
                 // ===== DOM READY =====
                 document.addEventListener('DOMContentLoaded', function () {
+
+                    // Show success popup after customer is saved
+                    const urlParams = new URLSearchParams(window.location.search);
+
+                    if (urlParams.get('success') === 'true') {
+                        document.getElementById('successModal').classList.add('active');
+                    }
+
                     // Set max date for DOB (today)
                     const today = new Date().toISOString().split('T')[0];
                     document.getElementById('dob').setAttribute('max', today);
 
                     // Form submission
                     document.getElementById('customerForm').addEventListener('submit', function (e) {
-                        e.preventDefault();
 
                         if (!validateForm()) {
+                            e.preventDefault();
                             return;
                         }
 
                         const submitBtn = document.getElementById('submitBtn');
                         submitBtn.disabled = true;
                         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-
-                        setTimeout(() => {
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = '<i class="fas fa-check"></i> Save Customer';
-                            document.getElementById('successModal').classList.add('active');
-                        }, 1500);
                     });
 
                     // Auto-capitalize name (Title Case)
