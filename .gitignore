@@ -1,0 +1,38 @@
+# Environment variables (NEVER commit real .env files)
+.env
+.env.local
+.env.production
+
+# Ignore build/output folders
+build/
+bin/
+dist/
+*.war
+*.ear
+
+# Ignore Eclipse specific files
+.settings/
+.metadata/
+.project
+.classpath
+*.tmp
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+build/
+app.war
+*.class
+
+# Ignore Tomcat runtime files (if your project is inside Tomcat's webapps folder)
+# It's better to NOT have your project here. Use a separate location.
+/target/
+
+# VS Code
+.vscode/
