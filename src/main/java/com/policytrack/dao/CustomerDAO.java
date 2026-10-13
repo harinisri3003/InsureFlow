@@ -100,11 +100,10 @@ public class CustomerDAO {
         return null;
     }
 
-    
 /**
- * Retrieve all customers from the database
+ * Retrieve all active customers from the database
  *
- * @return list of customers
+ * @return list of active customers
  */
 public java.util.List<Customer> findAll() {
 
@@ -116,6 +115,7 @@ public java.util.List<Customer> findAll() {
                  "occupation, income_range, notes, agent_id, created_at, " +
                  "updated_at, is_active " +
                  "FROM customers " +
+                 "WHERE is_active = 1 " +
                  "ORDER BY created_at DESC";
 
     try (Connection conn = DBConfig.getConnection();
@@ -133,7 +133,6 @@ public java.util.List<Customer> findAll() {
 
     return customers;
 }
-
 
 /**
  * Update an existing customer's details
@@ -180,17 +179,22 @@ public boolean update(Customer customer) {
     return false;
 }
 
-/**
- * Delete a customer by customer ID
- */
-public boolean deleteById(String customerId) {
 
-    String sql = "DELETE FROM customers WHERE customer_id = ?";
+/**
+ * Soft-delete a customer by marking them inactive.
+ * Only the owning agent can delete the customer.
+ */
+public boolean deleteById(String customerId, String agentId) {
+
+    String sql = "UPDATE customers SET is_active = 0 " +
+                 "WHERE customer_id = ? AND agent_id = ? " +
+                 "AND is_active = 1";
 
     try (Connection conn = DBConfig.getConnection();
          PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
         pstmt.setString(1, customerId);
+        pstmt.setString(2, agentId);
 
         return pstmt.executeUpdate() > 0;
 
@@ -201,7 +205,6 @@ public boolean deleteById(String customerId) {
 
     return false;
 }
-
 
     /**
      * Helper method to map ResultSet to Customer object

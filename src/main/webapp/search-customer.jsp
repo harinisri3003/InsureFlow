@@ -690,6 +690,21 @@
                                                             onclick="window.location.href='<%= request.getContextPath() %>/edit-customer?id=<%= customer.getCustomerId() %>'">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
+
+
+                                                        <form method="post"
+                                                            action="<%= request.getContextPath() %>/delete-customer"
+                                                            style="display: inline;"
+                                                            onsubmit="return confirm('Are you sure you want to delete this customer?');">
+
+                                                            <input type="hidden" name="customerId"
+                                                                value="<%= customer.getCustomerId() %>">
+
+                                                            <button type="submit" class="btn-action"
+                                                                title="Delete Customer" style="color: #dc2626;">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
