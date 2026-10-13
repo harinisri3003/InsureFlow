@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <jsp:include page="includes/auth-check.jsp" />
+    
+<%
+    if (request.getAttribute("customers") == null) {
+        response.sendRedirect(
+            request.getContextPath() + "/search-customers"
+        );
+        return;
+    }
+%>
+
     <!DOCTYPE html>
     <html lang="en">
 
