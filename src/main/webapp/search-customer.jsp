@@ -633,128 +633,73 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
+
                                 <tbody id="resultsBody">
-                                    <!-- Sample data rows - will be dynamic -->
-                                    <tr>
-                                        <td><span class="customer-id">CUS-2024-0001</span></td>
-                                        <td><span class="customer-name">Rajesh Kumar</span></td>
-                                        <td>9876543210</td>
-                                        <td>rajesh.kumar@email.com</td>
-                                        <td>Mumbai</td>
-                                        <td><span class="policy-badge has-policies">3</span></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn-action view" title="View Details"
-                                                    onclick="viewCustomer('CUS-2024-0001')">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="btn-action" title="View Policies"
-                                                    onclick="viewPolicies('CUS-2024-0001')">
-                                                    <i class="fas fa-file-alt"></i>
-                                                </button>
-                                                <button class="btn-action add" title="Add Policy"
-                                                    onclick="addPolicy('CUS-2024-0001')">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="customer-id">CUS-2024-0002</span></td>
-                                        <td><span class="customer-name">Priya Sharma</span></td>
-                                        <td>9988776655</td>
-                                        <td>priya.sharma@email.com</td>
-                                        <td>Delhi</td>
-                                        <td><span class="policy-badge has-policies">2</span></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn-action view" title="View Details"
-                                                    onclick="viewCustomer('CUS-2024-0002')">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="btn-action" title="View Policies"
-                                                    onclick="viewPolicies('CUS-2024-0002')">
-                                                    <i class="fas fa-file-alt"></i>
-                                                </button>
-                                                <button class="btn-action add" title="Add Policy"
-                                                    onclick="addPolicy('CUS-2024-0002')">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="customer-id">CUS-2024-0003</span></td>
-                                        <td><span class="customer-name">Amit Patel</span></td>
-                                        <td>8877665544</td>
-                                        <td>amit.patel@email.com</td>
-                                        <td>Ahmedabad</td>
-                                        <td><span class="policy-badge">0</span></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn-action view" title="View Details"
-                                                    onclick="viewCustomer('CUS-2024-0003')">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="btn-action" title="View Policies"
-                                                    onclick="viewPolicies('CUS-2024-0003')">
-                                                    <i class="fas fa-file-alt"></i>
-                                                </button>
-                                                <button class="btn-action add" title="Add Policy"
-                                                    onclick="addPolicy('CUS-2024-0003')">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="customer-id">CUS-2024-0004</span></td>
-                                        <td><span class="customer-name">Sneha Reddy</span></td>
-                                        <td>7766554433</td>
-                                        <td>sneha.reddy@email.com</td>
-                                        <td>Bangalore</td>
-                                        <td><span class="policy-badge has-policies">5</span></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn-action view" title="View Details"
-                                                    onclick="viewCustomer('CUS-2024-0004')">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="btn-action" title="View Policies"
-                                                    onclick="viewPolicies('CUS-2024-0004')">
-                                                    <i class="fas fa-file-alt"></i>
-                                                </button>
-                                                <button class="btn-action add" title="Add Policy"
-                                                    onclick="addPolicy('CUS-2024-0004')">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="customer-id">CUS-2024-0005</span></td>
-                                        <td><span class="customer-name">Vikram Singh</span></td>
-                                        <td>6655443322</td>
-                                        <td>vikram.singh@email.com</td>
-                                        <td>Jaipur</td>
-                                        <td><span class="policy-badge has-policies">1</span></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn-action view" title="View Details"
-                                                    onclick="viewCustomer('CUS-2024-0005')">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="btn-action" title="View Policies"
-                                                    onclick="viewPolicies('CUS-2024-0005')">
-                                                    <i class="fas fa-file-alt"></i>
-                                                </button>
-                                                <button class="btn-action add" title="Add Policy"
-                                                    onclick="addPolicy('CUS-2024-0005')">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <% java.util.List<com.policytrack.model.Customer> customers =
+                                        (java.util.List<com.policytrack.model.Customer>)
+                                            request.getAttribute("customers");
+
+                                            if (customers != null && !customers.isEmpty()) {
+                                            for (com.policytrack.model.Customer customer : customers) {
+                                            %>
+                                            <tr>
+                                                <td>
+                                                    <span class="customer-id">
+                                                        <%= customer.getCustomerId() %>
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <span class="customer-name">
+                                                        <%= customer.getFullName() %>
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <%= customer.getMobile() !=null ? customer.getMobile() : "-" %>
+                                                </td>
+                                                <td>
+                                                    <%= customer.getEmail() !=null ? customer.getEmail() : "-" %>
+                                                </td>
+                                                <td>
+                                                    <%= customer.getCity() !=null ? customer.getCity() : "-" %>
+                                                </td>
+
+                                                <td>
+                                                    <span class="policy-badge">0</span>
+                                                </td>
+
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <button class="btn-action view" title="View Details"
+                                                            onclick="viewCustomer('<%= customer.getCustomerId() %>')">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+
+                                                        <button class="btn-action" title="View Policies"
+                                                            onclick="viewPolicies('<%= customer.getCustomerId() %>')">
+                                                            <i class="fas fa-file-alt"></i>
+                                                        </button>
+
+                                                        <button class="btn-action add" title="Add Policy"
+                                                            onclick="addPolicy('<%= customer.getCustomerId() %>')">
+                                                            <i class="fas fa-plus"></i>
+                                                        </button>
+
+                                                        <button class="btn-action" title="Edit Customer"
+                                                            onclick="window.location.href='<%= request.getContextPath() %>/edit-customer?id=<%= customer.getCustomerId() %>'">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <% } } else { %>
+                                                <tr>
+                                                    <td colspan="7" style="text-align: center; padding: 24px;">
+                                                        No customers found. Add a customer to get started.
+                                                    </td>
+                                                </tr>
+                                                <% } %>
                                 </tbody>
                             </table>
 
