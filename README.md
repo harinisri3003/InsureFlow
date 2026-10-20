@@ -1,5 +1,3 @@
-Sure! 😊 Just copy and paste this directly into your `README.md`. I've kept it simple, with no testing section or future enhancements.
-
 # InsureFlow – Insurance Policy Management System
 
 InsureFlow is a web application that helps insurance agents manage customer records through a simple interface.
